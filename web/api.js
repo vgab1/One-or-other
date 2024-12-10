@@ -1,2 +1,2 @@
-const API_BASE_URL = "http://localhost:5173/";
+const API_BASE_URL = "https://one-or-other-backend.onrender.com";
 export default API_BASE_URL;
