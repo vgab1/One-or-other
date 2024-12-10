@@ -1,13 +1,12 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import { db, FieldValue } from "./firebase.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({ origin: "https://one-or-other.vercel.app" }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
