@@ -61,7 +61,7 @@ export default function Vote() {
       localStorage.setItem("choices", JSON.stringify(updatedChoices));
 
       try {
-        await axios.post("http://localhost:5000/escolha", {
+        await axios.post(`${import.meta.env.VITE_API_URL}/escolha`, {
           nome: username,
           escolha: artistName,
         });
