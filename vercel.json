@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    {
+      "source": "/vote",
+      "destination": "/escolha"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
+}
