@@ -1,28 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Sorriso from "../assets/sorriso.jpg";
-import Belo from "../assets/belo.jpg";
-import Menos_e_mais from "../assets/menos-e-mais.jpg";
-import Pericles from "../assets/pericles.jpg";
-import Ferrugem from "../assets/ferrugem.jpg";
-import Thiaguinho from "../assets/thiaguinho.jpg";
-import Gustavo_Lima from "../assets/gusttavo-lima.jpg";
-import Pixote from "../assets/pixote.jpg";
-import Zeneto_Cristiano from "../assets/zeneto-e-cristiano.jpg";
-import LegiaoUrbana from "../assets/legiao-urbana.jpg";
+import Pizza from "../assets/pizza.jpg";
+import Sushi from "../assets/sushi.jpg";
+import Hamburguer from "../assets/hamburguer.jpg";
+import Churrasco from "../assets/churrasco.jpg";
+import Coxinha from "../assets/coxinha.jpg";
+import Pastel from "../assets/pastel.jpg";
+import Spaghetti from "../assets/spaghetti.jpg";
+import Feijoada from "../assets/feijoada.jpg";
+import Pao_de_queijo from "../assets/pao-de-queijo.jpg";
+import Brigadeiro from "../assets/brigadeiro.jpeg";
 
 const artists = [
-  { id: 1, name: "Péricles", image: Pericles },
-  { id: 2, name: "Belo", image: Belo },
-  { id: 3, name: "Grupo Menos é Mais", image: Menos_e_mais },
-  { id: 4, name: "Pixote", image: Pixote },
-  { id: 5, name: "Ferrugem", image: Ferrugem },
-  { id: 6, name: "Thiaguinho", image: Thiaguinho },
-  { id: 7, name: "Gusttavo Lima", image: Gustavo_Lima },
-  { id: 8, name: "Zé Neto Cristiano", image: Zeneto_Cristiano },
-  { id: 9, name: "Sorriso Maroto", image: Sorriso },
-  { id: 10, name: "Legião Urbana", image: LegiaoUrbana },
+  { id: 1, name: "Pizza", image: Pizza },
+  { id: 2, name: "Sushi", image: Sushi },
+  { id: 3, name: "Hamburguer", image: Hamburguer },
+  { id: 4, name: "Churrasco", image: Churrasco },
+  { id: 5, name: "Coxinha", image: Coxinha },
+  { id: 6, name: "Pastel", image: Pastel },
+  { id: 7, name: "Spaghetti", image: Spaghetti },
+  { id: 8, name: "Feijoada", image: Feijoada },
+  { id: 9, name: "Pão de queijo", image: Pao_de_queijo },
+  { id: 10, name: "Brigadeiro", image: Brigadeiro },
 ];
 
 export default function Vote() {
@@ -30,8 +30,6 @@ export default function Vote() {
   const [currentPairIndex, setCurrentPairIndex] = useState(0);
   const [selectedArtist, setSelectedArtist] = useState<number | null>(null);
   const [choices, setChoices] = useState<string[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [artistToConfirm, setArtistToConfirm] = useState<number | null>(null);
 
   const navigate = useNavigate();
 
@@ -44,12 +42,7 @@ export default function Vote() {
   }, []);
 
   const handleArtistClick = (artistId: number) => {
-    if (artistId === 10) {
-      setIsModalOpen(true);
-      setArtistToConfirm(artistId);
-    } else {
-      setSelectedArtist(artistId);
-    }
+    setSelectedArtist(artistId);
   };
 
   const handleVote = async () => {
@@ -78,16 +71,6 @@ export default function Vote() {
     }
   };
 
-  const handleConfirmVote = () => {
-    setIsModalOpen(false);
-    setSelectedArtist(artistToConfirm);
-  };
-
-  const handleCancelVote = () => {
-    setIsModalOpen(false);
-    setSelectedArtist(null);
-  };
-
   const currentPair = artists.slice(
     currentPairIndex * 2,
     currentPairIndex * 2 + 2
@@ -98,8 +81,7 @@ export default function Vote() {
       <h1 className="text-3xl font-bold mb-4">
         Bem-vindo, {username ? username : "visitante"}!
       </h1>
-      <p className="text-lg mb-5">Escolha seu artista favorito abaixo:</p>
-      <p className="text-sm mb-5">E Cuidado para não votar errado!</p>
+      <p className="text-lg mb-5">Escolha sua comida favorita abaixo:</p>
       <div className="flex space-x-8">
         {currentPair.map((artist) => (
           <div key={artist.id} className="text-center">
@@ -107,7 +89,7 @@ export default function Vote() {
               src={artist.image}
               alt={artist.name}
               onClick={() => handleArtistClick(artist.id)}
-              className={`w-40 h-40 object-cover rounded-full mb-4 transition-all duration-300 cursor-pointer ${
+              className={`w-40 h-40 object-cover mb-4 transition-all duration-300 cursor-pointer ${
                 selectedArtist === artist.id
                   ? "border-4 border-green-500 opacity-100"
                   : selectedArtist === null
@@ -127,26 +109,6 @@ export default function Vote() {
           </div>
         ))}
       </div>
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-            <h2 className="text-2xl text-center mb-4">Tem certeza???</h2>
-            <p className="mb-4 text-center">No caso esse é um voto errado.</p>
-            <button
-              onClick={handleConfirmVote}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Confirmar
-            </button>
-            <button
-              onClick={handleCancelVote}
-              className="bg-gray-500 text-white px-4 py-2 rounded ml-4 hover:bg-gray-600"
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
