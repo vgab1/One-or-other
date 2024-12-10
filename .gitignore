@@ -1,0 +1,8 @@
+# Geral
+node_modules/
+.env
+*.log 
+
+# Firebase
+firebase-debug.log
+serviceAccountKey.json

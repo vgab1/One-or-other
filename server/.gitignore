@@ -1,0 +1,8 @@
+# Ignorar a pasta node_modules
+node_modules/
+
+# Ignorar variáveis de ambiente
+.env
+
+# Ignorar chaves de acesso do Firebase
+serviceaccountkey.json
