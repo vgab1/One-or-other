@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Result() {
   const [username, setUsername] = useState<string | null>("");
   const [choices, setChoices] = useState<string[]>([]);
-  const [results, setResults] = useState<unknown[]>([]);
+  const [results, setResults] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -23,7 +23,9 @@ export default function Result() {
 
     const fetchResults = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/escolhas");
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/escolhas`
+        );
         setResults(response.data);
       } catch (error) {
         console.error("Erro ao buscar os resultados:", error);
@@ -61,6 +63,11 @@ export default function Result() {
       >
         Voltar
       </button>
+      <div>
+        {results.map((result, index) => (
+          <p key={index}>{result}</p>
+        ))}
+      </div>
     </div>
   );
 }
