@@ -24,7 +24,7 @@ export default function Result() {
     const fetchResults = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/escolhas`
+          `${import.meta.env.VITE_API_URL}/result`
         );
         setResults(response.data);
       } catch (error) {

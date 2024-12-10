@@ -6,12 +6,12 @@ const api = axios.create({
 });
 
 export const saveChoice = async (nome: string, escolha: string) => {
-  const response = await api.post("/escolha", { nome, escolha });
+  const response = await api.post("/vote", { nome, escolha });
   return response.data;
 };
 
 export const getChoices = async () => {
-  const response = await api.get("/escolhas");
+  const response = await api.get("/vote");
   return response.data;
 };
 

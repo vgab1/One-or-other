@@ -30,7 +30,7 @@ export default function Vote() {
   const [currentPairIndex, setCurrentPairIndex] = useState(0);
   const [selectedArtist, setSelectedArtist] = useState<number | null>(null);
   const [choices, setChoices] = useState<string[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Controla o estado do modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [artistToConfirm, setArtistToConfirm] = useState<number | null>(null);
 
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ export default function Vote() {
       localStorage.setItem("choices", JSON.stringify(updatedChoices));
 
       try {
-        await axios.post(`${import.meta.env.VITE_API_URL}/escolha`, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/vote`, {
           nome: username,
           escolha: artistName,
         });

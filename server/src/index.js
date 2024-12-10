@@ -6,13 +6,7 @@ import { db, FieldValue } from "./firebase.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const corsOptions = {
-  origin: "https://one-or-other.vercel.app", 
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
-};
-
-app.use(cors(corsOptions));
+app.use(cors({ origin: "https://one-or-other.vercel.app" }));
 app.use(bodyParser.json());
 
 app.listen(PORT, () => {
@@ -23,7 +17,7 @@ app.get("/", (req, res) => {
   res.send("Backend funcionando!");
 });
 
-app.post("/escolha", async (req, res) => {
+app.post("/vote", async (req, res) => {
   try {
     const { nome, escolha } = req.body;
 
@@ -57,7 +51,7 @@ app.post("/escolha", async (req, res) => {
   }
 });
 
-app.get("/escolhas", async (req, res) => {
+app.get("/vote", async (req, res) => {
   try {
     const snapshot = await db.collection("usuarios").get();
     const usuarios = snapshot.docs.map((doc) => ({
