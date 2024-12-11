@@ -30,6 +30,7 @@ export default function Vote() {
   const [currentPairIndex, setCurrentPairIndex] = useState(0);
   const [selectedArtist, setSelectedArtist] = useState<number | null>(null);
   const [choices, setChoices] = useState<string[]>([]);
+  const [isVoting, setIsVoting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,11 +43,15 @@ export default function Vote() {
   }, []);
 
   const handleArtistClick = (artistId: number) => {
-    setSelectedArtist(artistId);
+    if (!isVoting) {
+      setSelectedArtist(artistId);
+    }
   };
 
   const handleVote = async () => {
-    if (selectedArtist !== null) {
+    if (selectedArtist !== null && !isVoting) {
+      setIsVoting(true);
+
       const artistName =
         artists.find((artist) => artist.id === selectedArtist)?.name || "";
       const updatedChoices = [...choices, artistName];
@@ -62,9 +67,12 @@ export default function Vote() {
         console.error("Erro ao salvar a escolha:", error);
       }
 
-      if (currentPairIndex < artists.length / 2 - 1) {
-        setCurrentPairIndex(currentPairIndex + 1);
-        setSelectedArtist(null);
+      if (currentPairIndex < Math.ceil(artists.length / 2) - 1) {
+        setTimeout(() => {
+          setCurrentPairIndex(currentPairIndex + 1);
+          setSelectedArtist(null);
+          setIsVoting(false);
+        }, 300);
       } else {
         navigate("/result");
       }
@@ -101,6 +109,7 @@ export default function Vote() {
             {selectedArtist === artist.id && (
               <button
                 onClick={handleVote}
+                disabled={isVoting}
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
               >
                 Votar
