@@ -1,4 +1,4 @@
-# Um ou Outro 🎶
+# Um ou Outro
 "Um ou Outro" é uma página web interativa que permite aos usuários escolherem entre dois alimentos e salvar suas preferências.
 
 ## 🌟 Funcionalidades
